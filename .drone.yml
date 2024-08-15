@@ -11,7 +11,7 @@ steps:
       - docker-compose stop keydb
       - docker-compose rm -f keydb
       - docker-compose up -d keydb
-      - docker image prune -f
+      - docker image prune -f --filter "label=com.docker.compose.project=keydb"
     when:
       branch:
         - main

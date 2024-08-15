@@ -1,0 +1,22 @@
+kind: pipeline
+type: docker
+name: deploy-keydb
+steps:
+  - name: deploy_keydb
+    image: docker/compose:1.29.2
+    environment:
+      KEYDB_PASSWORD:
+        from_secret: keydb_password
+    commands:
+      - docker-compose stop keydb
+      - docker-compose rm -f keydb
+      - docker-compose up -d keydb
+      - docker image prune -f
+    when:
+      branch:
+        - main
+trigger:
+  branch:
+    - main
+  event:
+    - push

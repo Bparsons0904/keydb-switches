@@ -5,7 +5,7 @@ steps:
   - name: deploy_keydb
     image: docker/compose:1.29.2
     environment:
-      KEYDB_PORT: 6739
+      KEYDB_PORT: 6379
       KEYDB_PASSWORD:
         from_secret: keydb_password
     commands:
